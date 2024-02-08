@@ -1,0 +1,106 @@
+---
+import { Icon } from "astro-icon/components";
+
+const {
+  socialLinks = [],
+  secondaryLinks = [],
+  links = [],
+  theme = "light",
+} = Astro.props;
+---
+
+<style>
+  .contenedor {
+    position: relative;
+    min-height: 100vh; /* Altura mínima de la ventana del navegador */
+    padding-bottom: 50px; /* Espacio para el footer */
+  }
+  footer {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #333; /* Color de fondo */
+    color: white; /* Color de texto */
+    text-align: center;
+    padding: 10px 0; /* Espaciado interior */
+  }
+</style>
+<div class="contenedor">
+  <!-- Todo tu contenido aquí -->
+  <footer class="border-t-8 border-socials">
+    <div
+      class="dark:bg-dark absolute inset-0 pointer-events-none"
+      aria-hidden="true"
+    >
+    </div>
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 dark:text-slate-300">
+      <div class="grid grid-cols-12 gap-4 gap-y-8 sm:gap-8 py-8 md:py-12">
+        <div class="col-span-12 lg:col-span-4">
+          <div class="mb-2">
+            <a class="inline-block font-bold text-xl text-white" href="/"
+              >Gravat</a
+            >
+          </div>
+          <div class="text-sm text-muted">
+            {
+              secondaryLinks.map(({ text }) => (
+                <a
+                  class="block text-white dark:text-gray-400 mr-2 rtl:mr-0 rtl:ml-2"
+                  set:html={text}
+                />
+              ))
+            }
+          </div>
+        </div>
+        {
+          links.map(({ title, links }) => (
+            <div class="col-span-6 md:col-span-3 lg:col-span-2">
+              <div class="dark:text-gray-300 text-white font-medium mb-2">
+                {title}
+              </div>
+              {links && Array.isArray(links) && links.length > 0 && (
+                <ul class="text-sm">
+                  {links.map(({ text, href, ariaLabel }) => (
+                    <li class="mb-2 ">
+                      <a
+                        class="text-white hover:text-gray-700 hover:underline dark:text-gray-400 transition duration-150 ease-in-out"
+                        href={href}
+                        aria-label={ariaLabel}
+                      >
+                        <Fragment set:html={text} />
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          ))
+        }
+        {
+          socialLinks.map(({ title, links }) => (
+            <div class="col-span-6 md:col-span-3 lg:col-span-2">
+              <div class="dark:text-gray-300 text-white font-medium mb-2">
+                {title}
+              </div>
+              <ul class="flex ml-0">
+                {links.map(({ ariaLabel, href, text, icon }) => (
+                  <li class="">
+                    <a
+                      class="text-white dark:text-gray-400 mr-2 bg-socials rounded-2xl text-sm inline-flex items-center justify-center w-8 h-8"
+                      aria-label={ariaLabel}
+                      href={href}
+                    >
+                      {icon && <Icon name={icon} class="w-5 h-5" />}
+                      <Fragment set:html={text} />
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </footer>
+</div>

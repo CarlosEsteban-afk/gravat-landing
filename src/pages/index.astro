@@ -1,0 +1,50 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { Image } from "@nextui-org/image";
+---
+
+<Layout title="Gravat">
+    <section class="blue-bg p-1">
+    <div class="flex front items-center text-left">
+      <div>
+        <h3 class="text-2xl font-bold sm:text-3xl mb-2">
+          ¿Quieres unirte a la empresa más grande en el grabado de patentes en
+          Chile?
+        </h3>
+      </div>
+      <div>
+        <Image
+          client:load
+          width={500}
+          height={500}
+          sizes="(max-width: 768px) 100vw, 432px"
+          src="/gravat.jpg"
+          alt="gravat"
+        />
+      </div>
+    </div>
+
+    <div class="mb-12 text-lg text-center mt-56 text-white">
+      <h1 class="text-4xl">GRAVAT lo hace fácil, rápido y seguro.</h1>
+      <h1 class="text-3xl">sistema de grabados único en Chile</h1>
+      <h1 class="text-3xl">↓</h1>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .front {
+    margin: auto;
+    padding: 1rem;
+    width: 1200px;
+    max-width: calc(100% - 2rem);
+    font-size: 20px;
+    line-height: 1.6;
+  }
+  .red-border {
+    border: 1px solid red;
+  }
+  .blue-bg {
+    background: linear-gradient(-10deg, #0086b1 0%, #0086b1 50%, #ffffff 50%);
+  }
+</style>
